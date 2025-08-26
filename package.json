@@ -1,0 +1,41 @@
+{
+  "name": "nexus-prompt-cli",
+  "version": "0.1.0",
+  "description": "CLI for nexus-prompt: fmt and lint helpers",
+  "type": "module",
+  "bin": {
+    "nexus-prompt": "dist/cli.cjs"
+  },
+  "main": "dist/cli.cjs",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "clean": "rm -rf dist",
+    "prepare": "vite build",
+    "prepack": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "cli",
+    "prettier",
+    "eslint",
+    "format",
+    "lint",
+    "nexus-prompt"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": ">=8",
+    "prettier": ">=2"
+  },
+  "devDependencies": {
+    "@types/node": "^18",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.5"
+  }
+}
