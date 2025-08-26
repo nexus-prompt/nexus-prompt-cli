@@ -20,17 +20,21 @@ TypeScript と Vite で構築された、フォーマット（fmt）とリント
     - `npx nexus-prompt fmt --check .`（CI向け: 変更が必要なら非0終了）
     - `npx nexus-prompt fmt src tests`
 
-- ESLint でリント:
-  - `npx nexus-prompt lint [--fix] [patterns...]`
+- Prompt DSL の YAML フロントマターをリント:
+  - `npx nexus-prompt lint [paths...]`（省略時は `.`）
   - 例:
     - `npx nexus-prompt lint .`
-    - `npx nexus-prompt lint --fix "src/**/*.{ts,tsx}"`
+    - `npx nexus-prompt lint src docs`
 
 ## 動作概要
 
 - `fmt` は `.md` を走査し、先頭の YAML フロントマターのみを `dumpYamlStable` で安定整形します（本文は変更しません）。
   - `--check` を付けると書き込みせず差分の有無だけを判定し、必要があれば非0終了します（CI向け）。
-- `lint` はプロジェクトから ESLint を動的に読み込み、ローカル設定で実行します。`--fix` で自動修正に対応。ESLint が未インストールの場合は、インストール方法を案内します。
+- `lint` は `.md` を対象に、先頭の YAML フロントマターを Prompt DSL としてパースし、以下を検査します。
+  - フロントマターの構文・スキーマが妥当であること（v1 は自動的に v2 として扱います）。
+  - `template` 内で使用されている変数が `inputs` に存在すること（欠落はエラー）。
+  - `inputs` に存在するが `template` で未使用の項目（警告）。
+  - `framework-*.md` はスキップします。
 
 ## ビルド
 
@@ -40,8 +44,9 @@ TypeScript と Vite で構築された、フォーマット（fmt）とリント
 
 ## 注意事項
 
-- `lint` を利用するには `eslint` をプロジェクトにインストールしてください。
-- `fmt` は `node_modules`、`.git`、`dist`、`build`、`coverage` をスキップします。
+- `fmt`/`lint` は `node_modules`、`.git`、`dist`、`build`、`coverage` をスキップします。
+- `lint` の対象は `.md` かつファイル名が `framework-` で始まらないものです。
+- フロントマターが存在しない `.md` は `lint` の対象外として無視します。
 
 ## ローカルインストール（macOS）
 

@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { formatSortKeysShallow, formatIndent2, formatLineWidth120 } from '../promptops/dsl/serializer.js';
+import { formatSortKeysShallow, formatIndent2, formatLineWidth120 } from '../promptops/dsl/formatter.js';
 
 // Markdown の YAML フロントマターのみ整形
 const DEFAULT_EXTS = new Set(['.md']);

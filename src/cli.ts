@@ -30,12 +30,12 @@ function printHelp() {
     'Commands:',
     '  fmt   Format Markdown front matter (YAML)',
     '        Usage: nexus-prompt fmt [--check] [paths...]  # defaults to .',
-    '  lint  Lint files using local ESLint',
-    '        Usage: nexus-prompt lint [--fix] [patterns...]',
+    '  lint  Lint Markdown front matter (Prompt DSL)',
+    '        Usage: nexus-prompt lint [paths...]  # defaults to .',
     '',
     'Examples:',
     '  npx nexus-prompt fmt .',
-    '  npx nexus-prompt lint --fix "src/**/*.{ts,tsx}"',
+    '  npx nexus-prompt lint .',
   ];
   console.log(lines.join('\n'));
 }

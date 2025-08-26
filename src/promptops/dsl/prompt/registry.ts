@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { PromptDslV2 } from './v2';
 import { dumpYamlStable, loadYaml } from '../serializer';
-
 export type LatestPromptDsl = z.infer<typeof PromptDslV2.Schema>;
 
 // 入力はYAML, JSON, TOML文字列または既にパース済みオブジェクトの両対応
