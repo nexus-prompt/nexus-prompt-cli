@@ -13,10 +13,11 @@ TypeScript と Vite で構築された、フォーマット（fmt）とリント
 
 ## 使い方
 
-- Prettier でフォーマット:
-  - `npx nexus-prompt fmt [paths...]`
+- Markdown の YAML フロントマターのみ整形（dumpYamlStable）:
+  - `npx nexus-prompt fmt [--check] [paths...]`
   - 例:
     - `npx nexus-prompt fmt .`
+    - `npx nexus-prompt fmt --check .`（CI向け: 変更が必要なら非0終了）
     - `npx nexus-prompt fmt src tests`
 
 - ESLint でリント:
@@ -27,7 +28,8 @@ TypeScript と Vite で構築された、フォーマット（fmt）とリント
 
 ## 動作概要
 
-- `fmt` はプロジェクトから Prettier を動的に読み込み、一般的な拡張子のファイルをフォーマットします。Prettier が未インストールの場合は、インストール方法を案内します。
+- `fmt` は `.md` を走査し、先頭の YAML フロントマターのみを `dumpYamlStable` で安定整形します（本文は変更しません）。
+  - `--check` を付けると書き込みせず差分の有無だけを判定し、必要があれば非0終了します（CI向け）。
 - `lint` はプロジェクトから ESLint を動的に読み込み、ローカル設定で実行します。`--fix` で自動修正に対応。ESLint が未インストールの場合は、インストール方法を案内します。
 
 ## ビルド
@@ -38,8 +40,8 @@ TypeScript と Vite で構築された、フォーマット（fmt）とリント
 
 ## 注意事項
 
-- 本パッケージは `prettier` と `eslint` を peerDependencies として宣言しています。ワークスペースにインストールして `fmt` と `lint` を有効にしてください。
-- 既定の `fmt` は一般的な拡張子を走査し、`node_modules`、`.git`、`dist`、`build`、`coverage` をスキップします。
+- `lint` を利用するには `eslint` をプロジェクトにインストールしてください。
+- `fmt` は `node_modules`、`.git`、`dist`、`build`、`coverage` をスキップします。
 
 ## ローカルインストール（macOS）
 

@@ -14,7 +14,8 @@
     "build": "vite build",
     "clean": "rm -rf dist",
     "prepare": "vite build",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "watch": "vite build --watch"
   },
   "engines": {
     "node": ">=18.0.0"

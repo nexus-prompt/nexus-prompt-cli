@@ -1,7 +1,20 @@
 import { defineConfig } from 'vite';
 import path from 'node:path';
+import fs from 'node:fs';
 
 export default defineConfig({
+  plugins: [
+    {
+      name: 'chmod-cli-executable',
+      apply: 'build',
+      closeBundle() {
+        const out = path.resolve(__dirname, 'dist/cli.cjs');
+        try {
+          fs.chmodSync(out, 0o755);
+        } catch {}
+      },
+    },
+  ],
   build: {
     target: 'node18',
     outDir: 'dist',
