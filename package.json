@@ -1,6 +1,6 @@
 {
   "name": "nexus-prompt-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "CLI for nexus-prompt: fmt and lint helpers",
   "type": "module",
   "bin": {
